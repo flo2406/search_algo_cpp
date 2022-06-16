@@ -68,6 +68,9 @@ void Search::draw()
 }
 
 
+// Find path function //
+
+
 void Search::find_path()
 {
 	queue<int> q;
@@ -76,6 +79,12 @@ void Search::find_path()
 	bool find = false;
 	while (!find)
 	{
+		if (q.empty())
+		{
+			cout << "Not possible to find a path" << endl;
+			return;
+		}
+
 		int val = q.front();
 		q.pop();
 		int _xA = val / ROWS;
@@ -118,6 +127,12 @@ void Search::check_case(int oldX, int oldY, int newX, int newY, queue<int> &q)
 	}
 }
 
+
+// Make maze functions //
+
+
+
+
 int random(int max)
 {
 	static bool first = true;
@@ -133,7 +148,7 @@ int random(int max)
 void Search::make_maze()
 {
 	rec_make_maze(xA, yA);
-	father[xB][yB] = -2;
+	this->father[yB][xB] = -2;
 
 	for (int i = 0; i < COLS; i++)
 	{
